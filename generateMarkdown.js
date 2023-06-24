@@ -33,6 +33,4 @@ function generateMarkdown(data) {
 `;
 }
 
-module.exports = generateMarkdown;
-module.exports = renderLicenseBadge;
-module.exports = renderLicenseSection;
+module.exports = {generateMarkdown,renderLicenseBadge,renderLicenseSection};

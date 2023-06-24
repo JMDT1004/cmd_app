@@ -1,6 +1,9 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generate = require('./generateMarkdown.js');
+const generateMarkdown = require('./generateMarkdown.js');
+const renderLicenseBadge = generateMarkdown.renderLicenseBadge;
+const renderLicenseSection = generateMarkdown.renderLicenseSection;
+
 const fs = require('fs');
 // TODO: Create an array of questions for user input
 
@@ -38,10 +41,13 @@ inquirer.prompt([
 ])
 
     .then(({ title, describe, instruct, usage, contribute, test, license, username, email }) => {
-        const licenseSection = generate(rendering);
+        const licenseSection = renderLicenseSection(license);
+        const licenseBadge = renderLicenseBadge(license);
+
         const content = `
 # ${title}
 ${describe}
+${licenseBadge}
         
 ## Tablt of Contents
 - [Installation](#installation)
