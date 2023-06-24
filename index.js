@@ -1,7 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./generateMarkdown.js');
-// const license = require($(license[license]));
+const generate = require('./generateMarkdown.js');
 const fs = require('fs');
 // TODO: Create an array of questions for user input
 
@@ -39,50 +38,49 @@ inquirer.prompt([
 ])
 
     .then(({ title, describe, instruct, usage, contribute, test, license, username, email }) => {
+        const licenseSection = generate(rendering);
         const content = `
-        # ${title}
-        ${describe}
+# ${title}
+${describe}
         
-        ##Tablt of Contents
-        - [Installation](#instruct)
-        - [Usage](#usage)
-        - [License](#license)
-        - [Contributing](#contribute)
-        - [Test](#test)
-        - [Questions](#questions)
+## Tablt of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Test](#test)
+- [Questions](#questions)
 
+## Installation:
+${instruct}
 
-        ##Installation
-        ${instruct}
+## Usage:
+${usage}
 
-        ##Usage
-        ${usage}
+## License:
+${licenseSection}
 
-        ##License
-        ${license}
+## Contributing:
+${contribute}
 
-        ##Contributing
-        ${contribute}
+## Test:
+${test}
 
-        ##Test
-        ${test}
-
-        ##Questions
-        For additional questions, you can reach me through my [GitHub profile](https://github.com/${username}) or via email at ${email}.
+## Questions:
+For additional questions, you can reach me through my [GitHub profile](https://github.com/${username}) or via email at ${email}.
         `
-        // TODO: Create a function to write README file
-
         fs.writeFile('./README.md', content, (err) => {
             if (err) throw err;
         })
+
     })
+    
 
 
+    // // TODO: Create a function to initialize app
+    // function init() { }
 
-// // TODO: Create a function to initialize app
-// function init() { }
-
-// // Function call to initialize app
-// init();
+    // // Function call to initialize app
+    // init();
 
 
